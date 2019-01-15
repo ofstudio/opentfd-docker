@@ -1,0 +1,6 @@
+*.code-workspace
+README.md
+LICENSE
+.env
+.git
+.gitignore

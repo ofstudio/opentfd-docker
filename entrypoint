@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+raise_error () {
+  >&2 echo "Error: $1 env is missing"
+  >&2 echo "Follow https://core.telegram.org/api/obtaining_api_id to obtain Telegram API id and hash"
+  exit -1
+}
+
+[[ -z "${API_ID}" ]] && raise_error "API_ID"
+[[ -z "${API_HASH}" ]] && raise_error "API_HASH"
+
+echo "api_id = '${API_ID}'" > secret.py
+echo "api_hash = '${API_HASH}'" >> secret.py
+
+mkdir -p /var/lib/opentfd
+cd /var/lib/opentfd
+python3 /usr/src/opentfd/opentfd.py
